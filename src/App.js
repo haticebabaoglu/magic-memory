@@ -49,19 +49,23 @@ const shuffleCards = () => {
 
   return (
     <div className="App">
-      <h1>Magic Match</h1>
+      <h1>Magic Memory Game</h1>
       <button onClick={shuffleCards}>New Game</button>
-      <div className='card-grid' >
-        {cards.map(card => (
-        <SingleCard key={card.id} card={card} 
-        handleChoice={handleChoice}
-        />
 
+      <div className="card-grid">
+        {cards.map((card) => (
+          <SingleCard
+            key={card.id}
+            card={card}
+            handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={disabled}
+          />
         ))}
-
       </div>
+
+      <p>Turns: {turns}</p>
     </div>
-     
   );
 }
 
