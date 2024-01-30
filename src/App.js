@@ -31,13 +31,23 @@ const shuffleCards = () => {
  const handleChoice = (card) => {
   choiceOne ? setChoiceTwo(card) : setChoiceOne(card); }
 
-  useEffect(() => {
-    if (choiceOne && choiceTwo)
-      if (choiceOne.src === choiceTwo.src)
-      console.log("those cards not match")
-      resetTurn()
-   }, [choiceOne, choiceTwo]);
- 
+ useEffect(() => {
+  setDisabled(true);
+  if (choiceOne && choiceTwo) {
+    if (choiceOne.src === choiceTwo.src) {
+      setCards((prevCards) =>
+        prevCards.map((card) =>
+          card === choiceOne || card === choiceTwo ? { ...card, matched: true } : card
+        )
+      );
+      resetTurn();
+    } else {
+      setTimeout(() => resetTurn(), 1000);
+    }
+  }
+}, [choiceOne, choiceTwo]);
+
+  
   //reset choice
   const resetTurn = () => {
     setChoiceOne(null);
