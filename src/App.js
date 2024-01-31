@@ -24,6 +24,8 @@ const shuffleCards = () => {
  .sort(() => Math.random() - 0.5)
  .map((card) => ({...card, id: Math.random()}))
  
+  setChoiceOne(null)
+  setChoiceTwo(null )
   setCards(shuffledCards)
   setTurns(0)
 }
@@ -32,8 +34,9 @@ const shuffleCards = () => {
   choiceOne ? setChoiceTwo(card) : setChoiceOne(card); }
 
  useEffect(() => {
-  setDisabled(true);
+  
   if (choiceOne && choiceTwo) {
+    setDisabled(true);
     if (choiceOne.src === choiceTwo.src) {
       setCards((prevCards) =>
         prevCards.map((card) =>
